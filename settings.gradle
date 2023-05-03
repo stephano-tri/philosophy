@@ -1,3 +1,4 @@
 rootProject.name = 'philosophy'
-include 'beakjoon'
+include 'boj:2012'
+findProject(':boj:2012')?.name = '2012'
 
