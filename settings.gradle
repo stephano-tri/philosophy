@@ -1,4 +1,6 @@
 rootProject.name = 'philosophy'
 include 'boj:2012'
 findProject(':boj:2012')?.name = '2012'
+include 'basic:fundamental'
+findProject(':basic:fundamental')?.name = 'fundamental'
 
