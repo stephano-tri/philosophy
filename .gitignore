@@ -8,6 +8,8 @@
 .idea
 
 .build
+./basic/**/build
+./boj/**/build
 
 # User-specific stuff
 .idea/**/workspace.xml
