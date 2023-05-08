@@ -3,4 +3,7 @@ include 'boj:2012'
 findProject(':boj:2012')?.name = '2012'
 include 'basic:fundamental'
 findProject(':basic:fundamental')?.name = 'fundamental'
+include 'boj:2178'
+findProject(':boj:2178')?.name = '2178'
+
 

@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class BFS {
     public static void bfs(int[][] graph, int startNode, boolean weighted){
