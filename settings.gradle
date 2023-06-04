@@ -5,5 +5,7 @@ include 'basic:fundamental'
 findProject(':basic:fundamental')?.name = 'fundamental'
 include 'boj:2178'
 findProject(':boj:2178')?.name = '2178'
-
+include 'boj'
+include 'boj:2573'
+findProject(':boj:2573')?.name = '2573'
 
