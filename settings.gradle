@@ -10,4 +10,7 @@ include 'boj:2573'
 findProject(':boj:2573')?.name = '2573'
 include 'boj:25757'
 findProject(':boj:25757')?.name = '25757'
+include 'programmers'
+include 'programmers:87377'
+findProject(':programmers:87377')?.name = '87377'
 
