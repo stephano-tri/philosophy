@@ -55,4 +55,6 @@ include 'boj:1120'
 findProject(':boj:1120')?.name = '1120'
 include 'boj:4779'
 findProject(':boj:4779')?.name = '4779'
+include 'programmers:67257'
+findProject(':programmers:67257')?.name = '67257'
 
