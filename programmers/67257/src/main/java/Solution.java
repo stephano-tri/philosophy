@@ -2,8 +2,10 @@ import java.util.*;
 
 class Solution {
     List<String> equation = new ArrayList<String>();
+    List<String> postfixEquation = new ArrayList<String>();
     Stack<String> numbers = new Stack<String>();
     Stack<String> operators = new Stack<String>();
+    List<Long> results = new ArrayList<Long>();
 
     List<List<String>> priorityOpers = new ArrayList<>();
 
@@ -22,6 +24,7 @@ class Solution {
                 equation.add("" + elem);
             }
         }
+        if(sb.length() > 0) equation.add(sb.toString());
     }
 
     public void dfs(String[] opers, String[] output , int depth, boolean[] visited){
@@ -40,27 +43,70 @@ class Solution {
     }
 
     public void calc(List<String> priorOpers){
-        for(int i = 0 ; i < equation.size(); i++){
-            if(numbers.size() == 2 && operators.size() == 1){
-                int lo = priorOpers.indexOf(operators.get(0));
-                int ro = priorOpers.indexOf(equation.get(i));
-
-                if(lo < ro) {
-                    // just
-                }
-                else {
-
-                }
-            }
-
+        //first convert infix to postfix
+        for(int i = 0 ; i < equation.size() ; i++){
             if(i % 2 == 0){
-                numbers.push(equation.get(i));
+                postfixEquation.add(equation.get(i));
             }
             else {
-                operators.push(equation.get(i));
+                if(operators.size() > 0) {
+                    if(priorOpers.indexOf(operators.peek()) <= priorOpers.indexOf(equation.get(i))) {
+                        while (operators.size() > 0 && priorOpers.indexOf(operators.peek()) <= priorOpers.indexOf(equation.get(i))) {
+                            postfixEquation.add(operators.pop());
+                        }
+                        operators.add(equation.get(i));
+                        continue;
+                    }
+
+                    if(priorOpers.indexOf(operators.peek()) > priorOpers.indexOf(equation.get(i))){
+                        operators.add(equation.get(i));
+                    }
+
+                }
+                else {
+                    operators.push(equation.get(i));
+                }
+            }
+        }
+
+       while(!operators.isEmpty()){
+            postfixEquation.add(operators.pop());
+       }
+
+        // do calculate postfix equation
+
+        for(String curr : postfixEquation){
+            boolean isNumber = true;
+            for(int i = 0 ; i < curr.length(); i ++){
+                if(!Character.isDigit(curr.charAt(i))){
+                    isNumber = false;
+                }
             }
 
+            if(isNumber){
+                numbers.push(curr);
+            }
+            else {
+                String ln = numbers.pop();
+                String rn = numbers.pop();
+                    switch (curr) {
+                        case "+":
+                            numbers.push(String.valueOf(Long.parseLong(rn) + Long.parseLong(ln)));
+                            break;
+                        case "-":
+                            numbers.push(String.valueOf(Long.parseLong(rn) - Long.parseLong(ln)));
+                            break;
+                        case "*":
+                            numbers.push(String.valueOf(Long.parseLong(rn) * Long.parseLong(ln)));
+                            break;
+                    }
+                }
         }
+
+        results.add(Math.abs(Long.parseLong(numbers.pop())));
+        System.out.println(postfixEquation);
+        System.out.println(results);
+        postfixEquation.clear();
     }
 
     public long solution(String expression) {
@@ -72,7 +118,11 @@ class Solution {
         setElements(expression);
         dfs(defaultOpers, initOpers, 0 , visited );
 
-
-        return answer;
+        for(List<String> elem : priorityOpers){
+            calc(elem);
+            System.out.println(elem);
+        }
+        results.sort(Collections.reverseOrder());
+        return results.get(0);
     }
 }
