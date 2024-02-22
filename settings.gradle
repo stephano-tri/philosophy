@@ -59,4 +59,8 @@ include 'programmers:67257'
 findProject(':programmers:67257')?.name = '67257'
 include 'programmers:42839'
 findProject(':programmers:42839')?.name = '42839'
+include 'programmers:64064'
+findProject(':programmers:64064')?.name = '64064'
+include 'programmers:42748'
+findProject(':programmers:42748')?.name = '42748'
 
