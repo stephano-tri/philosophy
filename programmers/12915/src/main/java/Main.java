@@ -26,7 +26,7 @@ public class Main {
         }
     }
 
-    public static void main(String args[]){
+    public static void main(String[] args){
         Solution sol = new Solution();
         System.out.println(Arrays.toString(sol.solution(new String[]{"sun", "bed", "car"}, 1)));
     }
